@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Clock</title>
+    <link rel="stylesheet" href="./clock.css">
+</head>
+<body>
+    <main>
+        <div class="clock">
+            <div class="minute hand"></div>
+            <div class="hour hand"></div>
+            <!-- Set the second hand last so that it passes over the other hands like a real clock -->
+            <div class="second hand"></div>
+            <div class="center_point hand"></div>
+        </div>
+    </main>
+    <script type="application/javascript">
+        // wait until the DOM has finished loading
+        document.addEventListener('DOMContentLoaded', function() {
+            // grab the current system time.
+            const currentTime = new Date();
+
+            // store a ref to the clock div where the css variables are set.
+            const clock = document.querySelector( '.clock' );
+
+            // set the starting point values to be the same as the current time.
+            clock.style.setProperty('--setTimeHour', currentTime.getHours());
+            clock.style.setProperty('--setTimeMinute', currentTime.getMinutes());
+            clock.style.setProperty('--setTimeSecond', currentTime.getSeconds());
+        });
+    </script>
+</body>
+</html>

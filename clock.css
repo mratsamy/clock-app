@@ -1,0 +1,84 @@
+:root {
+    --second: 1s;
+    --minute: calc(var(--second) * 60);
+    --hour: calc(var(--minute) * 60);
+    --gray: #f5f5f5;
+    --blue: dodgerblue;
+    --hand-width: 10px;
+}
+
+.second {
+    --width: 5px;
+    --height: 140px;
+    --color: gold;
+}
+
+.minute {
+    --width: 10px;
+    --height: 90px;
+    --color: dodgerblue;
+}
+
+.hour {
+    --width: 10px;
+    --height: 50px;
+    --color: #ff6600;
+}
+
+.center_point {
+    --width: 10px;
+    --height: 10px;
+    --color: #696969;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0);}
+    to { transform: rotate(1turn);}
+}
+
+.clock {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: var(--gray);
+    margin: 0 auto;
+    position: relative;
+    transform: rotate(180deg);
+
+    --setTimeHour: 12;
+    --setTimeMinute: 0;
+    --setTimeSecond: 0;
+    --timeShiftSecond: calc(var(--setTimeSecond) * var(--second));
+    --timeShiftHour: calc(var(--setTimeHour) * var(--hour));
+    --timeShiftMinute: calc(var(--setTimeMinute) * var(--minute));
+}
+
+.hand {
+    position: absolute;
+    left: calc(50% - (var(--width) / 2));
+    top: 50%;
+    width: var(--width);
+    height: var(--height);
+    background-color: var(--color);
+    transform-origin: center 0;
+    border-radius: calc(var(--width) / 2);
+}
+
+.hand.center_point {
+    top: calc(50% - var(--height) * .5);
+}
+
+.second.hand {
+    animation: rotate steps(60) var(--minute) infinite;
+    animation-delay: calc(var(--timeShiftSecond) * -1);
+}
+
+.minute.hand {
+    animation: rotate linear var(--hour) infinite;
+    animation-delay: calc(var(--timeShiftMinute) * -1);
+}
+
+.hour.hand {
+    animation: rotate linear calc(var(--hour) * 12) infinite;
+    animation-delay: calc((var(--timeShiftHour) + var(--timeShiftMinute)) * -1);
+}
